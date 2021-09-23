@@ -46,9 +46,10 @@ Feature: To Validate Time Series
   Scenario Outline: Validate by sending more than 5 requests per Min
     Given Report file is created
     And the required <symbol> provided
-    When  User will send <num> requests in one min and validate response
-    Then Valid Json Response received
+    When  User will send more that 5 requests in a min
+    Then  Validate that Error message is shown
     Examples:
-     |symbol|num|
-     |IBM|6     |
+     |symbol|
+     |IBM|
+
 

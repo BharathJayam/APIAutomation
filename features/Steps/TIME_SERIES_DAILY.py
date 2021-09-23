@@ -54,23 +54,27 @@ def Step_imp(context):
 @limits(5, 60)
 def Step_imp(context, num):
     time.sleep(60)
-    for i in range(int(num) - 1):
+    for i in range(1,int(num)):
         context.response = requests.get(context.url, params=context.vparams)
         responsejson = json.loads(str((context.response.text)))
         sortedresponseJson = sorted(responsejson.items())
         Expectedresponse = CommonFunctions.JsonFiletoItems("IBM.Json")
-        if i==5:
-            if ("Our standard API call frequency is 5 calls per minute and 500 calls per day") in str(context.response.text):
-                CommonFunctions.fun_Result("Pass", " Received response as", str(context.response.text))
-            else:
-                CommonFunctions.fun_Result("Fail", Expectedresponse, sortedresponseJson)
+        if Expectedresponse == sortedresponseJson:
+            CommonFunctions.fun_Result("Pass", Expectedresponse, sortedresponseJson)
         else:
-                if Expectedresponse == sortedresponseJson:
-                    CommonFunctions.fun_Result("Pass", Expectedresponse, sortedresponseJson)
-                else:
-                    CommonFunctions.fun_Result("Fail", Expectedresponse, sortedresponseJson)
+            CommonFunctions.fun_Result("Fail", Expectedresponse, sortedresponseJson)
 
-                CommonFunctions.fun_Result("Pass", "statusCode", context.response.status_code)
+
+@when('User will send more that 5 requests in a min')
+@sleep_and_retry
+@limits(5, 60)
+def Step_imp(context):
+    time.sleep(60)
+    for i in range(7):
+        context.response = requests.get(context.url, params=context.vparams)
+
+
+
 
 
 @then('status code of response should be {statusCode:d}')
@@ -109,3 +113,11 @@ def step_impl(context):
             CommonFunctions.fun_Result("Pass", "Generated File format is", "CSV")
 
 
+@then("Validate that Error message is shown")
+def step_impl(context):
+    responsejson = json.loads(str((context.response.text)))
+    sortedresponseJson = sorted(responsejson.items())
+    if ("Our standard API call frequency is 5 calls per minute and 500 calls per day") in str(context.response.text):
+        CommonFunctions.fun_Result("Pass", " Received response as", str(context.response.text))
+    else:
+        CommonFunctions.fun_Result("Fail", "Our standard API call frequency is 5 calls per minute and 500 calls per day",sortedresponseJson)

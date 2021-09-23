@@ -1,3 +1,0 @@
-# Tuple is immutable
-#
-
