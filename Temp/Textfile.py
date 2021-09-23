@@ -6,7 +6,7 @@ from datetime import datetime
 now = datetime.now()
 dt_string = now.strftime("%d%m%Y%H%M%S")
 TestName="First test case"
-path='Reports\\'
+path= '../Reports\\'
 Filename=path+TestName+dt_string+".txt"
 file1 = open(Filename,"w")
 file1.write('******************************************************** \n')
@@ -14,7 +14,7 @@ file1.write("TestName \n")
 file1.write('******************************************************** \n')
 file1.close()
 
-folder_path = 'Reports\\'
+folder_path = '../Reports\\'
 file_type = '\*txt'
 files = glob.glob(folder_path + file_type)
 max_file = max(files, key=os.path.getctime)

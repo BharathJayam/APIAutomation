@@ -24,6 +24,7 @@ def step_impl(context, function, symbol, apikey):
 def step_impl(context, symbol, outputsize):
     context.url = 'https://www.alphavantage.co/query'
     context.vparams = {'function': 'TIME_SERIES_DAILY', 'symbol': symbol, 'apikey': 'Y5YXY8OKSWGERFXC','outputsize': outputsize}
+    context.vSize=outputsize
 
 @given('the required {symbol} with {datatype} provided')
 def step_impl(context, symbol, datatype):
@@ -55,15 +56,15 @@ def Step_imp(context, num):
     time.sleep(60)
     for i in range(int(num) - 1):
         context.response = requests.get(context.url, params=context.vparams)
+        responsejson = json.loads(str((context.response.text)))
+        sortedresponseJson = sorted(responsejson.items())
+        Expectedresponse = CommonFunctions.JsonFiletoItems("IBM.Json")
         if i==5:
             if ("Our standard API call frequency is 5 calls per minute and 500 calls per day") in str(context.response.text):
                 CommonFunctions.fun_Result("Pass", " Received response as", str(context.response.text))
             else:
                 CommonFunctions.fun_Result("Fail", Expectedresponse, sortedresponseJson)
         else:
-                responsejson = json.loads(str((context.response.text)))
-                sortedresponseJson = sorted(responsejson.items())
-                Expectedresponse = CommonFunctions.JsonFiletoItems("IBM.Json")
                 if Expectedresponse == sortedresponseJson:
                     CommonFunctions.fun_Result("Pass", Expectedresponse, sortedresponseJson)
                 else:
@@ -82,7 +83,10 @@ def step_impl(context, statusCode):
 def step_impl(context):
     responsejson = json.loads(str((context.response.text)))
     sortedresponseJson = sorted(responsejson.items())
-    Expectedresponse = CommonFunctions.JsonFiletoItems("IBM.Json")
+    if "Full size" in (context.response.text):
+        Expectedresponse = CommonFunctions.JsonFiletoItems("IBMfull.Json")
+    else:
+        Expectedresponse = CommonFunctions.JsonFiletoItems("IBM.Json")
     if Expectedresponse == sortedresponseJson:
         CommonFunctions.fun_Result("Pass", Expectedresponse, sortedresponseJson)
     else:

@@ -20,7 +20,7 @@ Feature: To Validate Time Series
      |TIME_SERIES_DAILY|IBM|Y5YXY8OKSWGERFXC|
 
 
-  Scenario Outline: Validate output size
+  Scenario Outline: Validate output size is Full Size
     Given Report file is created
     And the required <symbol> and <outputsize> provided
     When we execute the Get method
