@@ -1,5 +1,7 @@
 
 functionality: https://www.alphavantage.co/documentation/#daily
+
+
 Generate a free api key from https://www.alphavantage.co/support/#api-key
 
 What Is This?
