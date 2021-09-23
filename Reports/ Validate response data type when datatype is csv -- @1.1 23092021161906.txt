@@ -1,0 +1,11 @@
+******************************************************** 
+Validate response data type when datatype is csv -- @1.1 
+******************************************************** 
+
+_____Pass______
+Expected is:statusCode
+Actual:200
+
+_____Pass______
+Expected is:Generated File format is
+Actual:CSV
