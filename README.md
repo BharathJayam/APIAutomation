@@ -1,10 +1,6 @@
 
 functionality: https://www.alphavantage.co/documentation/#daily
-
-
 Generate a free api key from https://www.alphavantage.co/support/#api-key
-
-
 
 What Is This?
 -------------
@@ -19,7 +15,7 @@ How To Use This
 
 2.Run from the terminal using behave command
 
-3.Reports will be avalible in Reports folder after the execuation.  
+3.Reports will be avalible  in Reports folder after the execuation.  
 
 
 Folders
@@ -28,8 +24,15 @@ Folders
 
 2.Features- Feature file and step Def file will be stored 
 
-3.RefFile- Refference .Json file will be placed 
+3.RefFile- Reference  .Json file will be placed 
 
 
 4.Reports- Detail report for each scenario with date and time stamp will be generated.
 
+
+
+
+
+Manual Test Cases :
+
+Manual test cases are places in manual test cases Folder
